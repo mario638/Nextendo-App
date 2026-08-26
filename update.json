@@ -1,0 +1,16 @@
+{
+  "latest": {
+    "version": "1.0.3.4",
+    "versionCode": 10,
+    "releaseDate": "2026-08-26",
+    "important": false,
+    "changelog": [
+      "Default language changed to English",
+      "Easter egg starts in English",
+      "Splatoon Calendar follows app language",
+      "Bug fixes"
+    ],
+    "downloadUrl": "https://github.com/mario638/Nextendo-Phone-App/releases/latest",
+    "apkDirectUrl": "https://updates.mario638.es/nextendo-phone-app-1.0.3.2.apk"
+  }
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nextendo - Actualizaciones</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #1f2937, #0b0f19);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #9ca3af;
+    }
+    .badge.important {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+    h1 {
+      margin: 18px 0 6px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .subtitle {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .changelog {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .changelog h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .changelog ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #e5e7eb;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: none;
+    }
+    .status {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .status.error { color: #f87171; }
+    .status.success { color: #34d399; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge" id="badge">Comprobando actualizaciones...</div>
+    <h1>Nextendo</h1>
+    <p class="subtitle">Información de la última versión disponible</p>
+
+    <div class="changelog" id="changelog" style="display:none;">
+      <h2>Cambios</h2>
+      <ul id="changelogList"></ul>
+    </div>
+
+    <div class="actions" id="actions" style="display:none;">
+      <a id="downloadBtn" class="btn" href="#" target="_blank" rel="noopener noreferrer">Descargar actualización</a>
+      <a class="btn secondary" href="https://github.com/mario638/Nextendo-Phone-App/releases/latest" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+    </div>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    const API = './update.json';
+
+    async function loadUpdates() {
+      const badge = document.getElementById('badge');
+      const status = document.getElementById('status');
+      const changelog = document.getElementById('changelog');
+      const changelogList = document.getElementById('changelogList');
+      const actions = document.getElementById('actions');
+      const downloadBtn = document.getElementById('downloadBtn');
+
+      try {
+        const res = await fetch(API, { cache: 'no-store' });
+        if (!res.ok) throw new Error('No se pudo cargar update.json');
+        const data = await res.json();
+        const latest = data.latest;
+
+        badge.textContent = `Última versión: ${latest.version}`;
+        badge.classList.toggle('important', !!latest.important);
+
+        changelogList.innerHTML = (latest.changelog || []).map(item => `<li>${item}</li>`).join('');
+        changelog.style.display = 'block';
+
+        const href = latest.apkDirectUrl || latest.downloadUrl;
+        if (href) {
+          downloadBtn.href = href;
+          actions.style.display = 'flex';
+        }
+
+        status.textContent = `Publicado: ${latest.releaseDate}`;
+        status.className = 'status success';
+      } catch (err) {
+        badge.textContent = 'Error';
+        status.textContent = err.message;
+        status.className = 'status error';
+      }
+    }
+
+    loadUpdates();
+  </script>
+</body>
+</html>
