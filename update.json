@@ -1,18 +1,13 @@
-  {
-    "latest": {
-      "version": "1.0.3.3",
-      "versionCode": 11,
-      "releaseDate": "2026-08-27",
-      "important": false,
-      "changelog": [
-        "Friend request notifications: get notified when someone sends you a friend request (once per person)",
-        "Friend request notification includes sender avatar",
-        "Default language changed to English",
-        "Easter egg starts in English",
-        "Splatoon Calendar follows app language",
-        "Bug fixes"
-      ],
-      "downloadUrl": "https://github.com/mario638/Nextendo-Phone-App/releases/latest",
-      "apkDirectUrl": "https://updates.mario638.es/nextendo-phone-app-1.0.3.3.apk"
-    }
+{
+  "latest": {
+    "version": "1.0.3.3",
+    "versionCode": 12,
+    "releaseDate": "2026-08-27",
+    "important": false,
+    "changelog": [
+      "Automated release for version 1.0.3.3"
+    ],
+    "downloadUrl": "https://github.com/mario638/Nextendo-Phone-App/releases/latest",
+    "apkDirectUrl": "https://updates.mario638.es/nextendo-phone-app-1.0.3.3.apk"
   }
+}
