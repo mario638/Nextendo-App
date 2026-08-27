@@ -1,13 +1,12 @@
 {
   "latest": {
     "version": "1.0.3.5",
-    "versionCode": 21,
+    "versionCode": 22,
     "releaseDate": "2026-08-27",
     "important": false,
     "changelog": [
       "Automated release for version 1.0.3.5"
     ],
-    "downloadUrl": "https://github.com/mario638/Nextendo-App/releases/latest",
-    "apkDirectUrl": "https://updates.mario638.es/nextendo-phone-app-1.0.3.5.apk"
+    "downloadUrl": "https://github.com/mario638/Nextendo-App/releases/latest"
   }
 }
