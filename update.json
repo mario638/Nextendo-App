@@ -3,7 +3,7 @@
     "version": "1.0.3.4",
     "versionCode": 18,
     "releaseDate": "2026-08-27",
-    "important": false,
+    "important": true,
     "changelog": [
       "Automated release for version 1.0.3.4"
     ],
